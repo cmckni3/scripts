@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 # usage: git-summary.rb [PATH] [NAME]
-# Note: NAME must be in quotes if it containts spaces
+# Note: NAME must be in quotes if it contains spaces
 
 path = ARGV.first || '.'
 user_search = ARGV[1] unless ARGV[1].nil?

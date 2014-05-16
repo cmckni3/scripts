@@ -15,7 +15,8 @@ Dir.glob(File.join('**', '.git')).each do |dir|
   if status != "" && log != ""
     summary = `git summary`
     if user_search
-      puts File.expand_path('.') if summary.match(user_search)
+      log_emails = `git log --pretty="%ce"`
+      puts File.expand_path('.') if summary.match(user_search) || log_emails.match(user_search)
     else
       puts summary
     end

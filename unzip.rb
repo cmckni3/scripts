@@ -7,6 +7,5 @@ Dir.chdir(cwd)
 Dir.glob(File.join('**', '*.zip')).each do |file|
   name = file[0..-5]
   puts name
-  #Dir.mkdir(name)
   `unzip "#{file}" -d "#{name}"`
 end

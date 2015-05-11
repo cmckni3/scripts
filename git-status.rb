@@ -8,7 +8,8 @@ Dir.chdir(cwd)
 Dir.glob(File.join('**', '.git')).each do |dir|
   dir_list = dir.split('/')[0..-2]
   Dir.chdir(dir_list.join('/'))
-  status = `git status`
+  status   = `git status`
+  remotes  = `git remote -v`
   statuses = {
     'Untracked' => "\e[31m\[Untracked\]\e[0m",
     'Changes not staged for commit' => "\e[31m\[Modified\]\e[0m",
@@ -20,6 +21,14 @@ Dir.glob(File.join('**', '.git')).each do |dir|
   statuses.each do |key, value|
     found_statuses << value if status.include?(key)
   end
-  puts File.expand_path('.') + "  " + found_statuses.join(' ') unless found_statuses.empty?
+  if found_statuses.any? || remotes.length.zero?
+    puts File.expand_path('.')
+  end
+  if found_statuses.any?
+    puts "  #{found_statuses.join(' ')}"
+  end
+  if remotes.length.zero?
+    puts "  \e[1;33mNo remote found\e[0m"
+  end
   Dir.chdir(cwd)
 end

@@ -1,14 +1,14 @@
 #!/usr/bin/env ruby
 
-directory = ARGV.first || 'code'
-directory = File.expand_path(directory)
-
-github_username_or_organization = ARGV[1]
+github_username_or_organization = ARGV[0]
 
 unless github_username_or_organization
   puts 'Error: No GitHub username or organization provided'
   Process.exit(1)
 end
+
+directory = ARGV[1] || 'code'
+directory = File.expand_path(directory)
 
 require 'rubygems'
 require 'octokit' # gem install octokit

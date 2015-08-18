@@ -1,18 +1,17 @@
 #!/usr/bin/env ruby
 
 # usage: git-summary.rb [PATH] [NAME]
-# Note: NAME must be in quotes if it contains spaces
 
 path = ARGV.first || '.'
-user_search = ARGV[1] unless ARGV[1].nil?
 cwd = File.expand_path(path)
+user_search = ARGV[1] unless ARGV[1].nil?
 Dir.chdir(cwd)
 Dir.glob(File.join('**', '.git')).each do |dir|
   dir_list = dir.split('/')[0..-2]
   Dir.chdir(dir_list.join('/'))
   status = `git status`
-  log    = `git log`
-  if status != "" && log != ""
+  log    = `git log 2>&1`
+  if $?.success?
     summary = `git summary`
     if user_search
       log_emails = `git log --pretty="%ce"`

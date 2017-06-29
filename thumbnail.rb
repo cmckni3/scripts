@@ -1,5 +1,12 @@
 #!/usr/bin/env ruby
 
+require 'bundler/inline'
+
+gemfile do
+  source 'https://rubygems.org'
+  gem 'rmagick'
+end
+
 require 'RMagick'
 image = Magick::ImageList.new('image.jpg').first
 thumb = image.resize_to_fit(300, 300)

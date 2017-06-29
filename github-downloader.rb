@@ -1,5 +1,12 @@
 #!/usr/bin/env ruby
 
+require 'bundler/inline'
+
+gemfile do
+  source 'https://rubygems.org'
+  gem 'octokit'
+end
+
 github_username_or_organization = ARGV[0]
 
 unless github_username_or_organization
@@ -11,7 +18,7 @@ directory = ARGV[1] || 'code'
 directory = File.expand_path(directory)
 
 require 'rubygems'
-require 'octokit' # gem install octokit
+require 'octokit'
 
 1.upto(10) do |page|
   Octokit.repositories(github_username_or_organization, page: page, per_page: 100).each do |repo|

@@ -5,7 +5,7 @@
 path = ARGV.first || '.'
 cwd = File.expand_path(path)
 Dir.chdir(cwd)
-Dir.glob(File.join('**', '.git'))
+Dir[File.join('**', '.git')]
   .select { |path| File.directory?(path) }
   .each do |dir|
     dir_list = dir.split('/')[0..-2]

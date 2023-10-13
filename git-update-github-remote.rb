@@ -28,7 +28,7 @@ Dir[File.join('**', '.git')]
         puts "new remote should be #{new_remote_url}"
 
         update_remote_command = "git remote set-url '#{remote}' '#{new_remote_url}'"
-        puts "command to change remote #{update_remote_command}"
+        puts "command to change remote #{update_remote_command}\n\n"
         remote_updated = `#{update_remote_command}`
       end
     end
